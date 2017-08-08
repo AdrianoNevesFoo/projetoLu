@@ -1,0 +1,29 @@
+    <div class="container">
+    <div class="card card-container">
+        <ul id="tabsLogin" class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#"><b>Funcionário</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><b>RH</b></a>
+            </li>
+        </ul>
+
+
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">@</span>
+                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" [(ngModel)]="registerCredentials.email">
+            </div>
+            <br>
+            <div class="input-group">
+                <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" [(ngModel)]="registerCredentials.password">
+            </div>
+            <br>
+ <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" [routerLink]="['/home']" >Entrar</button>
+            <a href="#" class="forgot-password">
+                Esqueceu sua senha?
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->

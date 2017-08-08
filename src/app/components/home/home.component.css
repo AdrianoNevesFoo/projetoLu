@@ -1,0 +1,11 @@
+ul{
+    list-style: none;
+}
+
+h6.card-header{
+     background-color: #ccddff; 
+}
+
+.card{
+    margin-bottom: 10px;
+}
