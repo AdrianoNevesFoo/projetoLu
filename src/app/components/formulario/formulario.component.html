@@ -1,0 +1,130 @@
+<app-nav></app-nav>
+
+<div class="container">
+  <div class="card">
+    <!-- *******************************************CABEÇALHO******************************************* -->
+    <h3 class="card-header">Eixo Gestão</h3>
+    <div class="card-block">
+
+
+      <form>
+        <div class="card">
+          <div class="card-block">
+            <div class="form-group row">
+              <label class="col-1"><b>Nome</b></label>
+              <div class="col-11">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Nome do funcionário">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-1"><b>Gerente</b></label>
+              <div class="col-11">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Nome do gerente">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-1"><b>Cargo</b></label>
+              <div class="col-5">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Cargo ocupado pelo funcionário">
+              </div>
+              <label class="col-1"><b>Processo</b></label>
+              <div class="col-5">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Processo">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-1"><b>Setor</b></label>
+              <div class="col-5">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Setor">
+              </div>
+              <label class="col-1"><b>Matrícula</b></label>
+              <div class="col-5">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Número de matrícula">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- *******************************************CABEÇALHO******************************************* -->
+
+
+        <div *ngFor="let question of formulario">
+          <div *ngIf="question.type == 'text'">
+            <div class="card">
+              <h6 class="card-header">
+                <div class="row">
+                  <div class="col-11"><p align="justify">{{question.question.questionNumber}} - {{question.question.pergunta}}</p></div>
+                  <div class="col-1">
+                    <button id="{{question.question.id}}" type="button" class="close" aria-label="Close" (click)="removeQuestao(question.question.id)">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>  
+                  </div>              
+              </h6>
+              <div class="card-block">
+                <div class="form-group">
+                  <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="question.type == 'radio'">
+            <div class="card">
+              <h6 class="card-header">
+                <p>{{question.question.pergunta}}</p>
+              </h6>
+              <div class="card-block">
+                <div class="form-group">
+                  <div class="col-sm-10">
+                    <div *ngFor="let o of question.question.opcoes">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                            {{o}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+           <!-- <div id="addFormButton" class="col-sm-10">
+            <button type="submit" class="btn btn-primary pull-right" (click)="adicionaQuestao()">Submit</button>
+          </div>  -->
+
+
+        <button type="button" class="btn btn-primary"
+                (click)="isCollapsed = !isCollapsed">Toggle collapse
+        </button>
+        <hr>
+        <div (collapsed)="collapsed($event)"
+            (expanded)="expanded($event)"
+            [collapse]="isCollapsed"
+            class="card card-block card-header">
+          <div class="well well-lg">
+            <div class="form-group">
+              <label for="exampleTextarea"><b>Adicione uma nova pergunta: </b></label>
+              <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" (click)='teste()'>Confirmar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+   <div class="container">
+    <button class="btn btn-default" (click)=showConfirm()>Show confirm</button>
+  </div>   
+
+  
+</div>

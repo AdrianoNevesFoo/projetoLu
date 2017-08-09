@@ -6,10 +6,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { FormComponent } from './components/form/form.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgFor } from '@angular/common';
 
 import { routing } from './app.routing';
 import { FormsModule } from '@angular/forms';
@@ -17,9 +16,16 @@ import { FormsModule } from '@angular/forms';
 //********************************PROVIDERS********************************
 // import { AuthService } from './providers/auth.service';
 
-//********************************ngxBootstrap********************************
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CollapseModule } from 'ngx-bootstrap';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal'
+
+
+import { FormularioComponent } from './components/formulario/formulario.component';
+import { ModalComponent } from './components/modal/modal.component';
+
+import * as $ from 'jquery';
 
 @NgModule({
   declarations: [
@@ -28,17 +34,22 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     NavComponent,
     HomeComponent,
     LoginComponent,
-    FormComponent,
-    
+    FormularioComponent,
+    ModalComponent,
+
   ],
   imports: [
     BrowserModule,
     routing,
-    FormsModule,
-    CollapseModule.forRoot()
-       
+    FormsModule,    
+    BootstrapModalModule.forRoot({ container: document.body }),
+    ModalModule.forRoot(),
+    CollapseModule.forRoot(),
   ],
-  providers: [  ],
+  entryComponents: [
+    ModalComponent
+  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
