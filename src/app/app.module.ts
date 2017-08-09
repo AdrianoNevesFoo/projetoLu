@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -14,7 +15,7 @@ import { routing } from './app.routing';
 import { FormsModule } from '@angular/forms';
 
 //********************************PROVIDERS********************************
-// import { AuthService } from './providers/auth.service';
+import { AuthService } from './providers/auth.service';
 
 
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -25,7 +26,21 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal'
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { ModalComponent } from './components/modal/modal.component';
 
+
 import * as $ from 'jquery';
+import * as firebase from 'firebase';
+
+
+firebase.initializeApp({
+    apiKey: "AIzaSyDGWmsFh0ZiIB6j_LBwAtSWZ_NqXAbC1g8",
+    authDomain: "sistemarh-57bd4.firebaseapp.com",
+    databaseURL: "https://sistemarh-57bd4.firebaseio.com",
+    projectId: "sistemarh-57bd4",
+    storageBucket: "",
+    messagingSenderId: "1022553262181"    
+});
+
+
 
 @NgModule({
   declarations: [
@@ -40,6 +55,7 @@ import * as $ from 'jquery';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     routing,
     FormsModule,    
     BootstrapModalModule.forRoot({ container: document.body }),
@@ -49,7 +65,7 @@ import * as $ from 'jquery';
   entryComponents: [
     ModalComponent
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

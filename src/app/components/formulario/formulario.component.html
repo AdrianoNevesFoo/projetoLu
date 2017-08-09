@@ -52,15 +52,17 @@
         <div *ngFor="let question of formulario">
           <div *ngIf="question.type == 'text'">
             <div class="card">
-              <h6 class="card-header">
+              <h6 id="bijay" class="card-header">
                 <div class="row">
-                  <div class="col-11"><p align="justify">{{question.question.questionNumber}} - {{question.question.pergunta}}</p></div>
+                  <div class="col-11">
+                    <p align="justify">{{question.question.questionNumber}} - {{question.question.pergunta}}</p>
+                  </div>
                   <div class="col-1">
                     <button id="{{question.question.id}}" type="button" class="close" aria-label="Close" (click)="removeQuestao(question.question.id)">
                       <span aria-hidden="true">&times;</span>
                     </button>
-                  </div>  
-                  </div>              
+                  </div>
+                </div>
               </h6>
               <div class="card-block">
                 <div class="form-group">
@@ -94,37 +96,43 @@
 
         </div>
 
-           <!-- <div id="addFormButton" class="col-sm-10">
-            <button type="submit" class="btn btn-primary pull-right" (click)="adicionaQuestao()">Submit</button>
-          </div>  -->
 
-
-        <button type="button" class="btn btn-primary"
-                (click)="isCollapsed = !isCollapsed">Toggle collapse
-        </button>
         <hr>
-        <div (collapsed)="collapsed($event)"
-            (expanded)="expanded($event)"
-            [collapse]="isCollapsed"
-            class="card card-block card-header">
+        <div id="newQuestionDiv" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card card-block card-header">
           <div class="well well-lg">
-            <div class="form-group">
+            <div id="newQuestionTextArea" class="form-group">
               <label for="exampleTextarea"><b>Adicione uma nova pergunta: </b></label>
-              <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+              <textarea id="newQuestionTexArea" class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="newQuestion" [ngModelOptions]="{standalone: true}"></textarea>
             </div>
-            <button type="button" class="btn btn-primary" (click)='teste()'>Confirmar</button>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="adicionar opção" aria-describedby="basic-addon2">
+                </div>
+                <button type="button" class="close" aria-label="add">
+  <span aria-hidden="true">&times;</span>
+</button>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)='confirmAddQuestion()'>Confirmar</button>
+            <button type="submit" class="btn btn-danger" (click)='cancelQuestion()'>Cancelar</button>
           </div>
         </div>
       </form>
+            <div *ngIf="isCollapsed" type="margin-bottom=50px">
+    <button id="buttonAddQuestion" type="button" class="btn btn-primary" (click)="shwoCollapsed()">Adiciona</button>
+  </div>
     </div>
+
   </div>
 
 
 
 
-   <div class="container">
+  <!-- <div class="container">
     <button class="btn btn-default" (click)=showConfirm()>Show confirm</button>
-  </div>   
+  </div>    -->
 
-  
+
 </div>

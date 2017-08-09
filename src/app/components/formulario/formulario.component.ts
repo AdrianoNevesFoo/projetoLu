@@ -24,8 +24,8 @@ export class FormularioComponent implements OnInit {
   public subscriptions: Subscription[] = [];
   public messages: string[] = [];
 
-
-
+  newQuestion:string;
+  teste:string;
   constructor(private dialogService:DialogService) {
     this.questionID = 0;         
    }
@@ -33,10 +33,10 @@ export class FormularioComponent implements OnInit {
   ngOnInit() {
   }
 
-  adicionaQuestao(){
+  adicionaQuestao(questao: string, opces: string[]){
             
     let q = new RadioQuestionModel();
-    q.pergunta = "Orientação para o cliente - Encantar sempre. Capacidade para atuar voltado para a satisfação das necessidades dos clientes internos e externos, buscando antecipar e identificar suas exigências de forma ágil e melhor, quando comparado a referências de excelência. Identifica ações internas e externas que impactam na área, processo, negócio e cliente.";
+    q.pergunta = questao;
     q.opcoes.push("1");
     q.opcoes.push("2");
     q.opcoes.push("3");
@@ -72,9 +72,36 @@ export class FormularioComponent implements OnInit {
     this.dialogService.addDialog(ModalComponent, { message:'Dialog with red backdrop' }, { backdropColor: 'rgba(0, 0, 0, 0.5)' });
   }
 
-  teste(){
+  shwoCollapsed(){
+    this.isCollapsed = false; 
+    setTimeout(function(){       
+      window.scrollTo(0,document.body.scrollHeight); 
+      
+    }, 10);
+           
+  }
+
+  confirmAddQuestion(){
+    this.adicionaQuestao(this.newQuestion, null);          
+    this.newQuestion = '';    
     this.isCollapsed = true;
   }
+
+  cancelQuestion(){              
+    this.newQuestion = '';    
+    this.isCollapsed = true;
+  }
+
+  
+
+  public collapsed(event:any):void {
+    
+  }
+ 
+  public expanded(event:any):void {
+
+  }
+
 }
 
 

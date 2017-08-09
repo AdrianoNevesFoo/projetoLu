@@ -2,10 +2,10 @@
     <div class="card card-container">
         <ul id="tabsLogin" class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="#"><b>Funcionário</b></a>
+                <a class="nav-link active" href="#"><b>RH</b></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><b>RH</b></a>
+                <a class="nav-link" href="#"><b>Funcionário</b></a>
             </li>
         </ul>
 
@@ -21,7 +21,7 @@
                 <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" [(ngModel)]="registerCredentials.password">
             </div>
             <br>
- <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" [routerLink]="['/home']" >Entrar</button>
+ <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" (click)='login()'>Entrar</button>
             <a href="#" class="forgot-password">
                 Esqueceu sua senha?
             </a>
