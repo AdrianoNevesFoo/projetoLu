@@ -1,58 +1,108 @@
-<app-nav></app-nav>
+
+
 
 <div class="container">
-  <div class="card">
-    <!-- *******************************************CABEÇALHO******************************************* -->
-    <h3 class="card-header">Eixo Gestão</h3>
-    <div class="card-block">
 
+<div id="formRH" class="card">
+  <h4 class="card-header headerForm">Formulario Analista</h4>
+  <div class="card-body">
+    <form>
+      <div class="card">
+        <div class="card-body">
+          <form>
 
-      <form>
-        <div class="card">
-          <div class="card-block">
-            <div class="form-group row">
-              <label class="col-1"><b>Nome</b></label>
-              <div class="col-11">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Nome do funcionário">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-1"><b>Gerente</b></label>
-              <div class="col-11">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Nome do gerente">
-              </div>
+            <div class="form-group">
+              <label for="inputAddress2" class="col-form-label"><b>Nome</b> </label>
+              <input type="number" class="form-control" id="inputAddress2" placeholder="Entre com o nome do funcionário">
             </div>
 
-            <div class="form-group row">
-              <label class="col-1"><b>Cargo</b></label>
-              <div class="col-5">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Cargo ocupado pelo funcionário">
-              </div>
-              <label class="col-1"><b>Processo</b></label>
-              <div class="col-5">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Processo">
-              </div>
+            <div class="form-group">
+              <label for="inputAddress2" class="col-form-label"><b>Gerente</b> </label>
+              <input type="text" class="form-control" id="inputAddress2" placeholder="Entre com o nome de seu gerente">
             </div>
 
-            <div class="form-group row">
-              <label class="col-1"><b>Setor</b></label>
-              <div class="col-5">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Setor">
+
+            <div class="form-row">
+
+              <div class="form-group col-md-6">
+                <label for="inputEmail4" class="col-form-label"><b>Cargo</b></label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="Entre com o cargo do funcionário">
               </div>
-              <label class="col-1"><b>Matrícula</b></label>
-              <div class="col-5">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Número de matrícula">
+              <div class="form-group col-md-6">
+                <label for="inputPassword4" class="col-form-label"><b>Processo</b></label>
+                <input type="password" class="form-control" id="inputPassword4" placeholder="Processo">
               </div>
             </div>
-          </div>
+            <div class="form-row">
+
+              <div class="form-group col-md-6">
+                <label for="inputEmail4" class="col-form-label"><b>Setor</b></label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="Número do setor">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4" class="col-form-label"><b>Matrícula</b></label>
+                <input type="password" class="form-control" id="inputPassword4" placeholder="Número de matrícula">
+              </div>
+            </div>
+          </form>
+
         </div>
+      </div>
         <!-- *******************************************CABEÇALHO******************************************* -->
 
 
         <div *ngFor="let question of formulario">
           <div *ngIf="question.type == 'text'">
             <div class="card">
-              <h6 id="bijay" class="card-header">
+              <h6 class="card-header header-Question">
+                <div class="row">
+
+                  <div class="col-10 question-text">
+                    <p align="justify">{{question.question.questionNumber}} - {{question.question.pergunta}}</p>
+                  </div>
+                  <div class="col-1 delete-question-button">
+                    <button id="{{question.question.id}}" type="button" class="close" aria-label="Close" (click)="removeQuestao(question.question.id)">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+              </h6>
+
+              
+              <div class="card-body">
+
+                <div class="row">
+                  <div class="card col-sm-9">
+                    <div class="form-group">
+                        <label for="inputAddress2" class="col-form-label"><b>Observações analista</b></label>
+                        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                        <label for="inputAddress2" class="col-form-label"><b>Observações gerente</b></label>
+                        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                      </div>
+                  </div>
+                  <div class="card col-sm-3 metric-value-card">
+                    <div class="row" id="rangeBox">
+                      <div class="col">
+                        <label for="inputAddress2" class="col-form-label"><b>Analista</b></label>
+                        <input type="number"  min="1" max="5" class="form-control" placeholder="0">  
+                      </div>
+                      <div class="col">
+                        <label for="inputAddress2" class="col-form-label"><b>Gerente</b></label>
+                        <input type="number"  min="1" max="5" class="form-control" placeholder="0">  
+                      </div>                                                                                    
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          <div *ngIf="question.type == 'radio'">
+            <div class="card">
+              <h6  class="card-header header-Question">
                 <div class="row">
                   <div class="col-11">
                     <p align="justify">{{question.question.questionNumber}} - {{question.question.pergunta}}</p>
@@ -63,21 +113,11 @@
                     </button>
                   </div>
                 </div>
-              </h6>
-              <div class="card-block">
-                <div class="form-group">
-                  <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div *ngIf="question.type == 'radio'">
-            <div class="card">
-              <h6 class="card-header">
+              </h6>             
+              <!-- <h6 class="card-header">
                 <p>{{question.question.pergunta}}</p>
-              </h6>
-              <div class="card-block">
+              </h6> -->
+              <div class="card-body">
                 <div class="form-group">
                   <div class="col-sm-10">
                     <div *ngFor="let o of question.question.opcoes">
@@ -95,44 +135,63 @@
           </div>
 
         </div>
+        
+        
+    
+        <div id="newQuestionDiv" class="collapse" id="collapseExample">
+          <div id="newQuestionDiv" class="card card-body">
+            <div class="well well-lg">
+              <div id="newQuestionTextArea" class="form-group">
+                <label for="exampleTextarea"><b>Adicione uma nova pergunta: </b></label>
+                <textarea id="newQuestionTexArea" class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="newQuestion" [ngModelOptions]="{standalone: true}"></textarea>
+              </div>
 
 
-        <hr>
-        <div id="newQuestionDiv" (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card card-block card-header">
-          <div class="well well-lg">
-            <div id="newQuestionTextArea" class="form-group">
-              <label for="exampleTextarea"><b>Adicione uma nova pergunta: </b></label>
-              <textarea id="newQuestionTexArea" class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="newQuestion" [ngModelOptions]="{standalone: true}"></textarea>
-            </div>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="adicionar opção" aria-describedby="basic-addon2">
+              <div id="allOptions" *ngFor="let o of newOptions">
+
+                <div id="option{{o}}" class="row optionLine">
+                  <label class="form-check-label .col-6 .col-md-4">
+                                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option2">                      
+                                    <input  type="text" class="form-control" placeholder="adicionar opção" aria-describedby="basic-addon2"[(ngModel)]="testeArray[o]" [ngModelOptions]="{standalone: true}">                                           
+                                </label>
+
+                  <div class=".col-6 .col-md-4">
+                    <a id="addOption" class="btn btn-default" aria-label="Settings" (click)="addNewOption()">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>  
+                                  </a>
+                    <a id="deleteOption" class="btn btn-default" aria-label="Settings" (click)="deleteNewOption()">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i> 
+                                  </a>
+                  </div>
                 </div>
-                <button type="button" class="close" aria-label="add">
-  <span aria-hidden="true">&times;</span>
-</button>
-              </label>
+              </div>
+
+
+              <div class="confirmCancelButton">
+                <button type="submit" class="btn btn-primary" (click)='confirmAddQuestion()'>Confirmar</button>
+                <button type="submit" class="btn btn-danger" (click)='cancelQuestion()'>Cancelar</button>
+              </div>
+              
             </div>
-            <button type="submit" class="btn btn-primary" (click)='confirmAddQuestion()'>Confirmar</button>
-            <button type="submit" class="btn btn-danger" (click)='cancelQuestion()'>Cancelar</button>
           </div>
         </div>
       </form>
-            <div *ngIf="isCollapsed" type="margin-bottom=50px">
-    <button id="buttonAddQuestion" type="button" class="btn btn-primary" (click)="shwoCollapsed()">Adiciona</button>
+
+      
+      <div *ngIf="isCollapsed">
+        <!-- <button id="buttonAddQuestion" type="button" class="btn btn-primary" (click)="shwoCollapsed()">Adiciona</button>             -->
+        <p>
+           <a class="btn" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+            aria-controls="collapseExample" (click)="shwoCollapsed()">
+            <a class="btn btn-default" aria-label="Settings">
+                <i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i>  
+            </a>                          
+          </a> 
+
+        </p>
+      </div>    
   </div>
-    </div>
-
-  </div>
-
-
-
-
-  <!-- <div class="container">
-    <button class="btn btn-default" (click)=showConfirm()>Show confirm</button>
-  </div>    -->
+</div>
 
 
 </div>

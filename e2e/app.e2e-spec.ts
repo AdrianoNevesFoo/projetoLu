@@ -1,14 +1,14 @@
-import { ProjetoLuPage } from './app.po';
+import { SiteSilPage } from './app.po';
 
-describe('projeto-lu App', () => {
-  let page: ProjetoLuPage;
+describe('site-sil App', () => {
+  let page: SiteSilPage;
 
   beforeEach(() => {
-    page = new ProjetoLuPage();
+    page = new SiteSilPage();
   });
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getParagraphText()).toEqual('Welcome to app!!');
   });
 });

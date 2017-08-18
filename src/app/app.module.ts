@@ -1,33 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+//************************************Services************************************
+
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AppComponent } from './app.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgFor } from '@angular/common';
+
 
 import { routing } from './app.routing';
-import { FormsModule } from '@angular/forms';
-
-//********************************PROVIDERS********************************
-import { AuthService } from './providers/auth.service';
-
-
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { CollapseModule } from 'ngx-bootstrap';
-import { BootstrapModalModule } from 'ng2-bootstrap-modal'
-
-
-import { FormularioComponent } from './components/formulario/formulario.component';
-import { ModalComponent } from './components/modal/modal.component';
-
 
 import * as $ from 'jquery';
+import 'bootstrap';
+import { LoginComponent } from './components/login/login.component';
+import { FormularioComponent } from './components/formulario/formulario.component';
+
+import { AuthService } from './providers/auth.service';
 import * as firebase from 'firebase';
 
 
@@ -36,36 +30,28 @@ firebase.initializeApp({
     authDomain: "sistemarh-57bd4.firebaseapp.com",
     databaseURL: "https://sistemarh-57bd4.firebaseio.com",
     projectId: "sistemarh-57bd4",
-    storageBucket: "",
+    storageBucket: "sistemarh-57bd4.appspot.com",
     messagingSenderId: "1022553262181"    
 });
-
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    NavComponent,
     HomeComponent,
+    NavbarComponent,
     LoginComponent,
-    FormularioComponent,
-    ModalComponent,
-
+    FormularioComponent,          
   ],
   imports: [
-    BrowserModule,
-    CommonModule,
-    routing,
+    BrowserModule,    
+    HttpModule,
     FormsModule,    
-    BootstrapModalModule.forRoot({ container: document.body }),
-    ModalModule.forRoot(),
-    CollapseModule.forRoot(),
-  ],
-  entryComponents: [
-    ModalComponent
+    FlashMessagesModule,
+    routing
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

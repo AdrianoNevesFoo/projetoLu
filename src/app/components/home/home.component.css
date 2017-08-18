@@ -1,13 +1,15 @@
+#imagem{
+    height: 200px;
+}
+
+#imgPerfil{
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
 ul{
     list-style: none;
-}
-
-h6.card-header{
-     background-color: #ccddff; 
-}
-
-.card{
-    margin-bottom: 10px;
 }
 
 .jumbotron {

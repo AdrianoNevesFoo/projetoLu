@@ -1,0 +1,96 @@
+{
+  "usuarios" : {
+       "-KoJMB9tT8VwbpPP1mx4" : {
+            "nome" : "Luciana Lago Martins",
+            "email" : "lu@lu.com",
+            "senha" : "admin",
+            "cargo" : "gerente",
+            "nivelHierarquico" : "gerente",
+            "pai" : "rh",
+            "filhos" : [
+              {
+                "nome":"Silveria Neves",
+                "id": "-KoJMB9hG4VwbjeP1mx4"
+              }
+            ] 
+          },
+          "-KoSMB1hT8VwbpPP1mx4" : {
+            "nome" : "Adriano Neves",
+            "email" : "bijay@bijay.com",
+            "senha" : "admin",
+            "cargo" : "gerente",
+            "nivelHierarquico" : "gerente",
+            "pai" : "rh",
+            "filhos" : [
+              {
+                "nome":"Tales Mota",
+                "id": "-KoJME9hT5VwbpPP1mx4"
+              },
+              {
+                "nome":"Laruo Jose",
+                "id": "-KoJMB9tT8VwbpxP1mx4"
+              }
+            ] 
+          },    
+          "-KoJME9hT5VwbpPP1mx4" : {
+            "nome" : "Tales Mota",
+            "email" : "tales@tales.com",
+            "senha" : "admin",
+            "cargo" : "analista",
+            "nivelHierarquico" : "analista",
+            "pai" : "-KoSMB1hT8VwbpPP1mx4",
+            "filhos" : [] 
+          },
+          "-KoJMB9tT8VwbpxP1mx4" : {
+            "nome" : "Lauro Jose",
+            "email" : "lauro@lauro.com",
+            "senha" : "admin",
+            "cargo" : "analista",
+            "nivelHierarquico" : "analista",
+            "pai" : "-KoSMB1hT8VwbpPP1mx4",
+            "filhos" : [] 
+          },            
+        "-KoJMB9hG4VwbjeP1mx4" : {
+            "nome" : "Silveria Neves",
+            "email" : "sil@sil.com",
+            "senha" : "admin",
+            "cargo" : "analista",
+            "nivelHierarquico" : "analista",
+            "pai" : "-KoJMB9tT8VwbpPP1mx4",
+            "filhos" : [] 
+        }
+
+  },
+      "userRH":{
+      "-KoJMB9hT8SibjeP1mx4" : {
+         "nome" : "Maria Petronilha",
+          "email" : "maria@maria.com",
+          "senha" : "admin",
+          "cargo" : "rh",
+          "nivelHierarquico" : "rh",
+          "pai" : "",
+          "filhos" : [
+            {
+              "nome":"Adriano Neves",
+              "id": ""
+            },
+            {
+              "nome":"Luciana Lago",
+              "id": "1"
+            },
+            {
+              "nome":"Tales Mota",
+              "id": ""
+            },
+            {
+              "nome":"Lauro Jose",
+              "id": ""
+            },
+            {
+              "nome":"Silveria Neves",
+              "id": ""
+            }
+          ]             
+      }
+    } 
+}

@@ -1,3 +1,10 @@
+#rangeBox{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); 
+    margin-bottom: 10px;
+}
+
 #addFormButton{
     margin-top: 20px;
 }
@@ -6,10 +13,53 @@
     margin-bottom: 10px;
 }
 
-#newQuestionDiv{
-    background-color: #e0ebeb;
+.metric-value-card{
+    background-color: #f7f7f7;
+}
+
+.headerForm{
+    background-color: #464a4c;
+    color: white;
 }
 
 #newQuestionDiv{
     background-color: #e0ebeb;
 }
+
+
+#deleteOption{
+    color: #E6001A;    
+}
+
+#newQuestionLine{
+    margin-bottom: 10px;
+}
+
+#gridRadios1{
+    margin-top: 15px;    
+}
+
+.optionLine{
+    margin-bottom: 10px;
+}
+
+.confirmCancelButton{
+    margin-top: 30px;
+}
+
+#formRH{
+    margin-top: 50px;
+}
+.number-question{
+    max-width: 3%;
+    padding: 0;
+}
+
+ .delete-question-button{
+    max-width: 4.333333%;
+}
+
+.question-text{
+    max-width: 100%;
+    flex: 1 0 83.333333%;
+} 

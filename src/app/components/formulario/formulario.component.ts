@@ -4,9 +4,9 @@ import { TextAreaQuestionModel } from '../../model/textAreaQuestionModel';
 import { RadioQuestionModel } from '../../model/radioQuestionModel';
 import { Subscription } from 'rxjs/Subscription';
 
-import { ModalComponent } from '../modal/modal.component';
+// import { ModalComponent } from '../modal/modal.component';
 
-import { DialogService } from "ng2-bootstrap-modal";
+// import { DialogService } from "ng2-bootstrap-modal";
 
  
 @Component({
@@ -20,34 +20,36 @@ export class FormularioComponent implements OnInit {
  
   questionID;    
   formulario = [];
-  
-  public subscriptions: Subscription[] = [];
-  public messages: string[] = [];
-
   newQuestion:string;
-  teste:string;
-  constructor(private dialogService:DialogService) {
-    this.questionID = 0;         
+
+  newOptions = [1];  
+  newOptionID = 1;
+  testeArray:string[] = [""];
+
+  constructor() {    
+    this.questionID = 0;    
+  
    }
 
   ngOnInit() {
   }
 
-  adicionaQuestao(questao: string, opces: string[]){
+  adicionaQuestao(questao: string, opcoes: string[], questionType:string){
             
     let q = new RadioQuestionModel();
     q.pergunta = questao;
-    q.opcoes.push("1");
-    q.opcoes.push("2");
-    q.opcoes.push("3");
-    q.opcoes.push("4");
-    q.opcoes.push("5"); 
 
+    if(opcoes != null){ 
+      opcoes.forEach(element => {
+      q.opcoes.push(element);
+    });      
+    }
+   
+    
     q.id = this.questionID; 
     q.questionNumber = this.questionID+1;
-    this.formulario.push( {type:"text", question: q});    
-    this.questionID++;  
-    console.log(this.formulario);
+    this.formulario.push( {type:questionType, question: q});    
+    this.questionID++;      
   }
 
   renumeraQuestoes(){
@@ -68,31 +70,60 @@ export class FormularioComponent implements OnInit {
     this.renumeraQuestoes();
   }
 
-  showConfirm() {
-    this.dialogService.addDialog(ModalComponent, { message:'Dialog with red backdrop' }, { backdropColor: 'rgba(0, 0, 0, 0.5)' });
-  }
 
-  shwoCollapsed(){
-    this.isCollapsed = false; 
+  shwoCollapsed(){ 
+    this.isCollapsed = false;
     setTimeout(function(){       
       window.scrollTo(0,document.body.scrollHeight); 
       
     }, 10);
+    
            
   }
 
   confirmAddQuestion(){
-    this.adicionaQuestao(this.newQuestion, null);          
+
+    let options;
+    if(this.testeArray.length > 1){      
+      options = this.testeArray.slice(1,(this.testeArray.length));  
+      this.adicionaQuestao(this.newQuestion, options,"radio");     
+    }else{
+      options = null;
+      this.adicionaQuestao(this.newQuestion, options,"text");     
+    }  
+    
+             
     this.newQuestion = '';    
     this.isCollapsed = true;
+    this.newOptionID = 1;
+    this.newOptions = [1];
+    
+    $('.collapse').collapse('hide');    
+
+    
+    this.testeArray = [""];
   }
 
   cancelQuestion(){              
     this.newQuestion = '';    
     this.isCollapsed = true;
+    $('.collapse').collapse('hide');
   }
 
-  
+  addNewOption(){
+    this.newOptionID ++;
+    this.newOptions.push(this.newOptionID);  
+    this.testeArray.push("");     
+  }
+
+  deleteNewOption(){
+    if(this.newOptions.length > 1){
+      let lastIndex = this.newOptions.length-1;
+      this.newOptions.splice(lastIndex,1);
+      this.testeArray.splice(lastIndex,1);
+      this.newOptionID--; 
+    }   
+  }
 
   public collapsed(event:any):void {
     

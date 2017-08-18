@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class ProjetoLuPage {
+export class SiteSilPage {
   navigateTo() {
     return browser.get('/');
   }
