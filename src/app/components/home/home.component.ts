@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { AuthService } from '../../providers/auth.service';
+import { Router }  from '@angular/router';
 
 
 @Component({
@@ -9,11 +11,11 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth:AuthService) {     
+  }
 
   ngOnInit() {
   }
-
 
   testeModal(){    
     $('#myModal').modal('show');
@@ -21,8 +23,7 @@ export class HomeComponent implements OnInit {
 
   addForm(){
     let list = $('#formList');
-    list.append('<li><div class="card"><div class="card-block"><h4 class="card-title">Card title</h4></div></div></li>');
-    
+    list.append('<li><div class="card"><div class="card-block"><h4 class="card-title">Card title</h4></div></div></li>');    
   }
 
   public modal(){

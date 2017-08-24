@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-
-
+import { AuthService } from '../../providers/auth.service';
+import { Router }  from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages'
 
 
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   private logado:boolean;
 
 
-  constructor( public flashMessage:FlashMessagesService) {    
+  constructor( public flashMessage:FlashMessagesService, private auth:AuthService, private router: Router) {    
     this.logado = false;        
   }
     ngOnInit() {
@@ -28,6 +28,17 @@ export class NavbarComponent implements OnInit {
     $('#myModal').modal('show');    
   }
 
+  private logout(){
+    
+    this.auth.signOut().then(
+      _ =>{
+        console.log("Logout efetuado com sucesso!");
+        this.router.navigateByUrl('/login');
+      },
+      erro =>{
 
+      }
+    )
+  }
 
 }

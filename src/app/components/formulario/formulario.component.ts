@@ -3,10 +3,8 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { TextAreaQuestionModel } from '../../model/textAreaQuestionModel';
 import { RadioQuestionModel } from '../../model/radioQuestionModel';
 import { Subscription } from 'rxjs/Subscription';
+import { AuthService } from '../../providers/auth.service';
 
-// import { ModalComponent } from '../modal/modal.component';
-
-// import { DialogService } from "ng2-bootstrap-modal";
 
  
 @Component({
@@ -26,9 +24,8 @@ export class FormularioComponent implements OnInit {
   newOptionID = 1;
   testeArray:string[] = [""];
 
-  constructor() {    
-    this.questionID = 0;    
-  
+  constructor(private auth:AuthService) {    
+    this.questionID = 0;        
    }
 
   ngOnInit() {

@@ -1,0 +1,26 @@
+  <div class="container"> 
+<table class="table table-hover">
+  <thead class="thead-inverse">
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>Cargo</th>
+      <th>Supervisão</th>
+      <th>Opoção</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let f of funcionariosBanco">
+    <tr class="ng-scope" style="cursor:pointer">      
+      <th scope="row">{{f.numberID}}</th>
+      <td>{{f.name}}</td>
+      <td>{{f.cargo}}</td>
+      <td>{{f.supervisao}}</td>
+      <td>
+            <a class="btn btn-default" aria-label="Settings">
+                <i class="fa fa-cog" aria-hidden="true" style="margin-left:50%"></i>  
+            </a>                 
+    </tr>
+  </tbody>
+</table>
+
+</div>  

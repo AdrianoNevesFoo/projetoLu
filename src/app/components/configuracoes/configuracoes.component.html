@@ -1,0 +1,13 @@
+
+
+<div class="container"> 
+    <!-- <input id="file" type="file" (change)="fileChanged($event)"> -->
+    <div class="form-group">
+        <label  class="col-form-label"><b>Arquivo</b> </label>
+        <input id="file" type="file" class="form-control" (change)="fileChanged($event)">
+    </div>       
+    <div *ngIf="isFileReaderWork" class="alert alert-success">FileReader works!</div>    
+
+</div>
+
+<button (click)="printBase()">Entrar</button>
