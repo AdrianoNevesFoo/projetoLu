@@ -1,0 +1,197 @@
+<!-- *******************************************NAVBAR******************************************* -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/login">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/home">Formulário Novo<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/addFuncionarios">Resposta Supervisor</a>
+      </li>                        
+    </ul>  
+    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="logout()">Sair</button>
+  </div>
+</nav>
+<!-- *******************************************NAVBAR******************************************* -->
+
+
+
+<div class="container">
+
+<div id="formRH" class="card">
+  <h4 class="card-header headerForm">Formulário:</h4>
+  <div class="card-body">
+    <!-- *******************************************CABEÇALHO******************************************* -->
+    <form>
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="inputAddress2" class="col-form-label"><b>Nome do Funcionário:</b> </label>
+              <input id="formDescricao" type="text" class="form-control cabecalho" value="{{currentFuncionario.getName()}}" readonly>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress2" class="col-form-label"><b>Cargo:</b> </label>
+              <input id="formDescricao" type="text" class="form-control cabecalho" value="{{currentFuncionario.getCargo()}}" readonly>
+            </div>   
+            <div class="form-row">         
+              <div class="form-group col-md-4">
+                <label class="col-form-label"><b>Código:</b></label>
+                <input id="formDescricao" type="text" class="form-control cabecalho" value="{{currentFuncionario.getCodigo()}}" readonly>
+              </div>
+              <div class="form-group col-md-8">
+                <label class="col-form-label"><b>Supervisor:</b></label>
+                <input id="formDescricao" type="text" class="form-control cabecalho" value="{{currentFuncionario.getSupervisao()}}" readonly>
+              </div> 
+            </div>                         
+            <div class="form-group">
+              <label for="inputAddress2" class="col-form-label"><b>Descrição Formulário:</b> </label>
+              <input id="formDescricao" type="text" class="form-control cabecalho" value="{{novoFormulario.getDescricao()}}" readonly>
+            </div>
+            <div class="form-row">
+
+              <div class="form-group col-md-4">
+                <label class="col-form-label"><b>Data de envio:</b></label>
+                <input id="dataInicio" type="date" class="form-control cabecalho form-Cabecalho" value={{novoFormulario.getDataInicio()}} readonly>
+              </div>
+              <div class="col-md-4"></div>
+              <div class="form-group col-md-4">
+                <label class="col-form-label"><b>Data limite de resposta:</b></label>
+                <input id="dataFinal" type="date" class="form-control cabecalho form-Cabecalho" value={{novoFormulario.getDataFinal()}} readonly>              
+              </div>
+            </div>
+            <div class="form-row"> 
+            </div>
+          </form>
+        </div>
+      </div>
+        <!-- *******************************************CABEÇALHO******************************************* -->
+
+
+        <div *ngFor="let question of novoFormulario.getQuestions()">          
+            <div class="card">
+              <h6 class="card-header header-Question">
+                <div class="row">
+
+                  <div class="col-10 question-text">
+                    <p align="justify">{{question.questionNumber}} - {{question.pergunta}}</p>
+                  </div>
+
+                </div>
+              </h6>
+
+              
+              <div class="card-body">
+
+                <div class="row">
+                  <div class="card col-sm-9">
+                    <div class="form-group">
+                        <label  class="col-form-label"><b>Observações analista</b></label>
+                        <textarea id="obsAna-{{question.questionNumber}}" class="form-control"  rows="3"></textarea>
+                        <label  class="col-form-label"><b>Observações supervisor</b></label>
+                        <textarea id="obsSup-{{question.questionNumber}}" class="form-control"  rows="1" readonly></textarea>
+                      </div>
+                  </div>
+                  <div class="card col-sm-3 metric-value-card">
+                    <div class="row" id="rangeBox">
+                      <div class="col">
+                        <label class="col-form-label"><b>Analista</b></label>
+                        <input id="notaAna-{{question.questionNumber}}" type="number"  min="0" max="5" class="form-control" placeholder="0">  
+                      </div>
+                      <div class="col">
+                        <label class="col-form-label"><b>Supervisor</b></label>
+                        <input id="ntoaSup-{{question.questionNumber}}" type="number"  min="0" max="5" class="form-control" placeholder="0" readonly>  
+                      </div>                                                                                    
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+      </form>
+
+    <button class="btn btn-success" (click)="salvarEstadoAnalista()">Salvar respostas</button>
+    <button class="btn btn-primary" (click)="enviarParaSupervisor()">Enviar para supervisor</button>
+  </div>
+
+  
+</div>
+
+
+
+
+</div>
+
+<div id="modalSuccess"class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Dados salvos </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Os dados do seu formulário foram salvos com sucesso.</p>
+        <p>você pode continuar respondendo as perguntas ou continuar de onde parou posteriormente.</p>
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="supervisorSuccess"class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Formulário Enviado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p align="justify">O formulário foi enviado ao supervisor com sucesso!</p>
+        <p align="justify">A partir de agora você não poderá mais alterar as respostas contidas neste formulário.
+          Apenas o seu supervisor poderá alterar as notas atribuidas a cada questão. </p>
+          
+          <p align="justify">Entre em contato com o supervisor:</p>
+
+           - <b>{{currentFuncionario.getSupervisao()}}</b> 
+          <!-- <p>para finalizar o formulário até a data limite:{{currentFuncionario.getDataFinal()}}</p>  -->
+       
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalFormError"class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Erro!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p align="justify">Você precisa responder à todas as perguntas antes de enviar o formulário a seu supervisor.</p>       
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

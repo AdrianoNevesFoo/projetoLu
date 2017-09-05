@@ -20,8 +20,29 @@ export class FuncionarioModel {
     private cpf:string;
 
     private numberID:string;
-    
+    private cpfSupervisor:string;
+    private cpfDependentes:string[];
+
     constructor() {
+        this.name = "";
+        this.codigo = "";
+        this.cidade = "";
+        this.regional = "";
+        this.estado = "";
+        this.admissao = "";
+        this.experiencia = "";
+        this.formacao = "";
+        this.setor = "";
+        this.cargo = "";
+        this.supervisao = "";
+        this.coordenador = "";
+        this.gerencia = "";
+        this.diretoria = "";
+        this.email = "";
+        this.data = "";
+        this.cpf = "";
+        this.cpfSupervisor = "";
+        this.cpfDependentes = [];
     }
 
     getName(){
@@ -120,7 +141,7 @@ export class FuncionarioModel {
     setData(data:string){        
         this.data = data;
     }    
-    getCpf(){
+    getCpf(){        
         return this.cpf;
     }
     setCpf(newCpf:string){
@@ -131,5 +152,17 @@ export class FuncionarioModel {
     }
     setNumberID(numberID:string){
         this.numberID = numberID;
-    }    
+    }  
+    getCpfSupervisor(){
+        return this.cpfSupervisor;
+    }
+    setCpfSupervisor(cpf:string){
+        this.cpfSupervisor = cpf;
+    }  
+    getDependentes(){
+        return this.cpfDependentes;
+    }
+    addDependente(cpf:string){
+        this.cpfDependentes.push(cpf);
+    }
 }

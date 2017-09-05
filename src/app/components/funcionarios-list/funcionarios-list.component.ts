@@ -20,23 +20,12 @@ export class FuncionariosListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.dataService.getFuncionarios()
-      .then(funcionarios_snapshot => {              
-          funcionarios_snapshot.forEach(um_funcionario_snapshot => {
-                let newFuncionario = new FuncionarioModel();
-                let funcionarioKey = um_funcionario_snapshot.key;
-                let func = um_funcionario_snapshot.val();
-                newFuncionario.setName(func["nome"]);
-                newFuncionario.setCargo(func["cargo"]);
-                newFuncionario.setSupervisao(func["supervisao"]);  
-                newFuncionario.setNumberID(func["numberID"]);                  
-                this.funcionariosBanco.push(newFuncionario);
-          });           
-      },
-        erro => 
-            {
-              //  this.showError(erro.message);
+    this.dataService.getFuncionariosList()
+        .subscribe(
+            topicos_observable => {
+              this.funcionariosBanco = topicos_observable;                    
+              console.log(topicos_observable );
             }
-      );
+        );
   }
 }

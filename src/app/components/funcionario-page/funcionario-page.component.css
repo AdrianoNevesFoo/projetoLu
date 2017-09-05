@@ -9,3 +9,11 @@
 .cardCabecalho{
     background-color: #f7f7f7;
 }
+
+.modal-dialog{
+    max-width: 90%;
+}
+
+.form-Cabecalho{
+    background-color: white;
+}

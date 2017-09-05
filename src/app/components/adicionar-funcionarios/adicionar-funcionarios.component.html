@@ -1,3 +1,6 @@
+<app-navbar></app-navbar>
+
+
 <div class="container"> 
 
     <div class="card">
@@ -6,18 +9,14 @@
                 <div class="form-group">
                     <label  class="col-form-label"><b>Carregar arquivo da base de dados</b> </label>
                     <input id="file" type="file" class="form-control" (change)="fileChanged($event)">
-                </div>                       
-                
-
-                
-
+                </div>                                                       
 
      <div class="card exitLog">
         <div class="card-body">
             <h4 class="card-title">Logs de saída</h4>
             <h6 class="card-subtitle mb-2 text-muted">Registros observados no carregamento da base de dados</h6>
             <div *ngIf="exitLogString.length > 0" class="form-group exitLo">
-                <label for="exampleTextarea">Example textarea</label>
+                <label for="exampleTextarea"></label>
                 <textarea readonly class="form-control" id="exampleTextarea" rows="20" >{{exitLogString}}</textarea>
             </div>      
         </div>

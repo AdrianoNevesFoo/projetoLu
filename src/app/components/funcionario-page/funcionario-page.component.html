@@ -1,4 +1,6 @@
-<div id="cardPrincipal" class="card">
+xoxota
+
+<!-- <div id="cardPrincipal" class="card">
   <div class="card-body">
     <div class="cabecalho">
       <div class="card cardCabecalho">
@@ -21,21 +23,21 @@
       <div class="col-7">         
         <div class="card">
           <div class="card-body">
-            <table class="table">
+            <table class="table table-hover">
               <thead class="thead-inverse">
                 <tr>
-                  <th>#</th>
-                  <th>ID</th>
-                  <th>Data</th>
+                  <th>#</th>                  
+                  <th>Data envio</th>
+                  <th>Data resposta</th>
                   <th>Data</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>relat01</td>
-                  <td>23/08/2017</td>
-                  <td>26/08/2017</td>
+                <tr class="ng-scope" style="cursor:pointer" (click)="openModalForm()">
+                  <th scope="row">1</th>                  
+                  <td>{{novoFormulario.getDataInicio()}}</td>
+                  <td>{{novoFormulario.getDataFinal()}}</td>
+                  <td><img _ngcontent-c6="" class="img-rounded" src="/assets/pdf.png"></td>
                 </tr>              
               </tbody>
             </table>
@@ -49,18 +51,18 @@
              <table class="table">
               <thead class="thead-inverse">
                 <tr>
-                  <th>#</th>
-                  <th>ID</th>
+                  <th>#</th>                  
                   <th>Data de envio</th>
                   <th>Data de resposta </th>
+                  <th>ID</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">1</th>
-                  <td>relat01</td>
+                  <th scope="row">1</th>                  
                   <td>23/08/2017</td>
                   <td>26/08/2017</td>
+                  <td><img _ngcontent-c6="" class="img-rounded" src="/assets/pdf.png"></td>
                 </tr>              
               </tbody>
             </table>
@@ -71,3 +73,90 @@
     </div>
   </div>
 </div>
+
+
+
+<div id="modalForm" class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Formulário</h5>
+      </div>
+      <div class="modal-body">
+              <div class="card">
+        <div class="card-body">
+          <form>
+
+            <div class="form-group">
+              <label for="inputAddress2" class="col-form-label"><b>Descrição Formulário:</b> </label>                
+                <textarea readonly class="form-control form-Cabecalho" id="exampleTextarea" rows="2" >{{novoFormulario.getDescricao()}}</textarea>                              
+            </div>
+            <div class="form-row">
+
+              <div class="form-group col-md-4">
+                <label for="inputEmail4" class="col-form-label"><b>Data de envio:</b></label>                
+                <input id="dataInicio" type="date" class="form-control form-Cabecalho" value={{novoFormulario.getDataInicio()}} readonly>
+              </div>
+              <div class="col-md-4"></div>
+              <div class="form-group col-md-4">
+                <label for="inputPassword4" class="col-form-label"><b>Data limite de resposta:</b></label>
+                <input id="dataInicio" type="date" class="form-control form-Cabecalho" value={{novoFormulario.getDataFinal()}} readonly>
+              </div>
+            </div>
+            <div class="form-row"> 
+            </div>
+          </form>
+
+
+
+
+        <div *ngFor="let question of novoFormulario.getQuestions()">          
+            <div class="card">
+              <h6 class="card-header header-Question">
+                <div class="row">
+
+                  <div class="col-10 question-text">
+                    <p align="justify">{{question.questionNumber}} - {{question.pergunta}}</p>
+                  </div>
+                </div>
+              </h6>
+
+              
+              <div class="card-body">
+
+                <div class="row">
+                  <div class="card col-sm-9">
+                    <div class="form-group">
+                        <label for="inputAddress2" class="col-form-label"><b>Observações analista</b></label>
+                        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                        <label for="inputAddress2" class="col-form-label"><b>Observações gerente</b></label>
+                        <textarea class="form-control" id="exampleTextarea" rows="3" readonly></textarea>
+                      </div>
+                  </div>
+                  <div class="card col-sm-3 metric-value-card">
+                    <div class="row" id="rangeBox">
+                      <div class="col">
+                        <label for="inputAddress2" class="col-form-label"><b>Analista</b></label>
+                        <input type="number"  min="0" max="5" class="form-control" placeholder="0">  
+                      </div>
+                      <div class="col">
+                        <label for="inputAddress2" class="col-form-label"><b>Gerente</b></label>
+                        <input type="number"  min="0" max="5" class="form-control" placeholder="0" readonly>  
+                      </div>                                                                                    
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+                    
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Enviar formulário</button>
+      </div>
+    </div>
+  </div>
+</div> -->

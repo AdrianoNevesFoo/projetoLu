@@ -13,51 +13,45 @@ export class LoginFuncionarioComponent implements OnInit {
   
   private funcionarioKey:string;
   private mapFuncionarios = new Map();
+  private currentFuncionario:FuncionarioModel;
   
 
   constructor(private dataService: DataService,  private router: Router, private activatedRout: ActivatedRoute) {     
     this.funcionarioKey="";
-  }
-
-  ngOnInit() {
-    this.dataService.getFuncionarios()
-      .then(funcionarios_snapshot => {              
-          funcionarios_snapshot.forEach(um_funcionario_snapshot => {
-                let newFuncionario = new FuncionarioModel();
-                let funcionarioKey = um_funcionario_snapshot.key;
-                let func = um_funcionario_snapshot.val();
-                newFuncionario.setName(func["nome"]);
-                newFuncionario.setCargo(func["cargo"]);
-                newFuncionario.setSupervisao(func["supervisao"]);  
-                newFuncionario.setNumberID(func["numberID"]);                  
-                this.mapFuncionarios.set(funcionarioKey, newFuncionario);
-          });           
-      },
-        erro => 
-            {
-              //  this.showError(erro.message);
-            }
-      );
-
+    this.currentFuncionario = new FuncionarioModel();
     
   }
 
-  loginFuncionario(){
-    if(this.mapFuncionarios.has(this.funcionarioKey)){
-      let currentFuncionario = this.mapFuncionarios.get(this.funcionarioKey);  
-      
-      let navigationExtras: NavigationExtras = {
-                  queryParams: {
-                    "name":currentFuncionario.getName(),
-                    "cargo":currentFuncionario.getCargo(),
-                    "key":this.funcionarioKey
-                  }
-              };       
-      this.router.navigate(['/funcionario'], navigationExtras);
-    }
-   
+  ngOnInit() {
+  
   }
 
-
-
+  loginFuncionario(){
+    
+    this.dataService.getFuncionario(this.funcionarioKey)
+        .subscribe(
+            funcionario => {                              
+                this.currentFuncionario = funcionario;                
+                let navigationExtras: NavigationExtras = {
+                    queryParams: {
+                      "nome":this.currentFuncionario.getName(),
+                      "cpf":this.currentFuncionario.getCpf(),
+                      "cpfSupervisor":this.currentFuncionario.getCpfSupervisor(),
+                      "email":this.currentFuncionario.getEmail(),
+                      "dependentes":this.currentFuncionario.getDependentes(),
+                      "cargo":this.currentFuncionario.getCargo(),
+                      "supervisao":this.currentFuncionario.getSupervisao(),
+                      "key":this.funcionarioKey,
+                    }
+                }; 
+                if(this.currentFuncionario.getDependentes().length == 0){  
+                  console.log("Analista");
+                  this.router.navigate(['/analistaview'], navigationExtras);
+                }else{
+                  console.log("Supervisor");
+                  this.router.navigate(['/supervisorview'], navigationExtras);
+                }
+            }
+        );
+    }
 }

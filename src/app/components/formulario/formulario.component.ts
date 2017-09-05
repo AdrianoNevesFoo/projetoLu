@@ -1,10 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 
-import { TextAreaQuestionModel } from '../../model/textAreaQuestionModel';
+
 import { RadioQuestionModel } from '../../model/radioQuestionModel';
+import { QuestionModel } from '../../model/questionModel';
+import { FormularioModel } from '../../model/formularioModel';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from '../../providers/auth.service';
-
+import { DataService } from '../../providers/data.service';
 
  
 @Component({
@@ -17,51 +19,50 @@ export class FormularioComponent implements OnInit {
   public isCollapsed:boolean = true;
  
   questionID;    
-  formulario = [];
+  
   newQuestion:string;
 
   newOptions = [1];  
   newOptionID = 1;
   testeArray:string[] = [""];
+  private formulario:FormularioModel;
+  private dataInicio:string;
+  private dataFinal:string;
+  private descricao:string;
+  private erroForm;
 
-  constructor(private auth:AuthService) {    
-    this.questionID = 0;        
+  constructor(private auth:AuthService, private dataService: DataService) {    
+    this.questionID = 0;     
+    this.formulario = new FormularioModel();  
+    this.erroForm = ""; 
    }
 
   ngOnInit() {
   }
 
-  adicionaQuestao(questao: string, opcoes: string[], questionType:string){
+  adicionaQuestao(questao: string){
             
-    let q = new RadioQuestionModel();
-    q.pergunta = questao;
-
-    if(opcoes != null){ 
-      opcoes.forEach(element => {
-      q.opcoes.push(element);
-    });      
-    }
-   
-    
-    q.id = this.questionID; 
+    let q = new QuestionModel();
+    q.pergunta = questao;  
+     
     q.questionNumber = this.questionID+1;
-    this.formulario.push( {type:questionType, question: q});    
-    this.questionID++;      
+    this.questionID++;
+    this.formulario.addQuestion(q);    
+     
   }
 
   renumeraQuestoes(){
-    let aux = 0;
-    this.formulario.forEach(element => {
-      element.question.id = aux;
+    let aux = 1;
+    this.formulario.getQuestions().forEach(element => {      
+      element.questionNumber = aux;
       aux++;         
-    });
-    this.questionID = aux;
+    });    
   }
 
-  removeQuestao(idButton){    
+  removeQuestao(questionNumber){    
 
-    this.formulario.splice(idButton, 1);
-    if(this.formulario.length == 0){      
+    this.formulario.getQuestions().splice((questionNumber-1), 1);    
+    if(this.formulario.getQuestions().length == 0){      
       this.questionID = 0;
     }
     this.renumeraQuestoes();
@@ -73,32 +74,19 @@ export class FormularioComponent implements OnInit {
     setTimeout(function(){       
       window.scrollTo(0,document.body.scrollHeight); 
       
-    }, 10);
-    
-           
+    }, 10);               
   }
 
-  confirmAddQuestion(){
-
-    let options;
-    if(this.testeArray.length > 1){      
-      options = this.testeArray.slice(1,(this.testeArray.length));  
-      this.adicionaQuestao(this.newQuestion, options,"radio");     
-    }else{
-      options = null;
-      this.adicionaQuestao(this.newQuestion, options,"text");     
-    }  
-    
-             
+  confirmAddQuestion(){    
+    this.adicionaQuestao(this.newQuestion);     
+      
     this.newQuestion = '';    
     this.isCollapsed = true;
     this.newOptionID = 1;
-    this.newOptions = [1];
+    this.newOptions = [1];    
     
-    $('.collapse').collapse('hide');    
+    $('.collapse').collapse('hide');        
 
-    
-    this.testeArray = [""];
   }
 
   cancelQuestion(){              
@@ -122,14 +110,39 @@ export class FormularioComponent implements OnInit {
     }   
   }
 
-  public collapsed(event:any):void {
+  recuperaCabelcalho():boolean{    
+    let inicio = $('#dataInicio').val().toString();
+    let final = $('#dataFinal').val().toString();
+    let descri = $('#formDescricao').val().toString();
     
+        
+    if((inicio.length == 0)||(final.length == 0)||(descri.length == 0)){   
+      this.erroForm = "O cabeçalho precisa ser completamente preenchido antes de enviar o formulário!";     
+      $('#myModal').modal('show');
+      return false;
+    }else{
+      this.formulario.setDataInicio(inicio);
+      this.formulario.setDataFinal(final);
+      this.formulario.setDescricao(descri);      
+      return true;
+    }
   }
- 
-  public expanded(event:any):void {
+
+  enviarFormularios(){ 
+    if(this.recuperaCabelcalho()){
+      if(this.formulario.getQuestions().length == 0){
+        this.erroForm = "O formulário não possui nenhuma questão. Adicione pelo menos uma questão para poder enviar."
+        $('#myModal').modal('show');
+      }else{
+        this.dataService.enviaFormularioFuncionarioList(this.formulario);    
+      }
+    }             
+  }
+
+  deleteFormulariosNovos(){
+    this.dataService.deleteFormularioNovo();
 
   }
-
 }
 
 

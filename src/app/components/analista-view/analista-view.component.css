@@ -1,0 +1,25 @@
+.container{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#formulariosFuncSup{
+    margin-bottom: 30px;
+    margin-top: 40px;
+}   
+
+.card-subtitle{
+    margin-bottom: 30px;
+}
+
+#historicoFormularios{
+    margin-bottom: 30px;
+}
+
+form{
+    margin-bottom: 20px;
+}
+
+.cabecalho{
+    background-color: white;
+}

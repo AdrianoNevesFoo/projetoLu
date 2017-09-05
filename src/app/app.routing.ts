@@ -10,6 +10,9 @@ import { AdicionarFuncionariosComponent } from './components/adicionar-funcionar
 import { FuncionariosListComponent } from './components/funcionarios-list/funcionarios-list.component';
 import { LoginFuncionarioComponent } from './components/login-funcionario/login-funcionario.component';
 import { FuncionarioPageComponent } from './components/funcionario-page/funcionario-page.component';
+import { AnalistaViewComponent } from './components/analista-view/analista-view.component';
+import { SupervisorViewComponent } from './components/supervisor-view/supervisor-view.component' 
+
 
 const routes: Routes = [  
   { path: 'login', component: LoginComponent },
@@ -19,7 +22,8 @@ const routes: Routes = [
   { path: 'addFuncionarios', component: AdicionarFuncionariosComponent },
   { path: 'funcionariosList', component: FuncionariosListComponent },
   { path: 'loginFuncionario', component: LoginFuncionarioComponent },  
-  { path: 'funcionario', component: FuncionarioPageComponent },  
+  { path: 'analistaview', component: AnalistaViewComponent },  
+  { path: 'supervisorview', component: SupervisorViewComponent },  
 
 ];
 

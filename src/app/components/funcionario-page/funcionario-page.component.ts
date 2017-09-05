@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { FuncionarioModel } from '../../model/funcionarioModel';
+import { FormularioModel } from '../../model/formularioModel';
+import { QuestionModel } from '../../model/questionModel';
 import { DataService } from '../../providers/data.service';
 
 
@@ -12,39 +14,62 @@ import { DataService } from '../../providers/data.service';
 export class FuncionarioPageComponent implements OnInit {
 
 
-  private key:string;  
-  private funcionario:FuncionarioModel;
+  private key:string; 
+  private dependentes:string;   
+  private novoFormulario:FormularioModel;
+  private currentFuncionario:FuncionarioModel;
   
   constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService) {
-    this.funcionario = new FuncionarioModel();
+    
+    this.novoFormulario = new FormularioModel();
+    this.currentFuncionario = new FuncionarioModel();
     
    }
 
   ngOnInit() {
     let name = "";
     this.route.queryParams.subscribe(params => {
-      this.key = params["key"]; 
-
+      this.currentFuncionario.setName(params["nome"]);
+      params["dependentes"].forEach(element => {
+        this.currentFuncionario.addDependente(element);
+      });
+      this.currentFuncionario.setCpf(params["cpf"]);
+      this.currentFuncionario.setCpfSupervisor(params["cpfSupervisor"]);
+      this.currentFuncionario.setCargo(params["cargo"]);
     });    
 
-    this.dataService.getUser(this.key).then(snapshot =>{
-        let func = snapshot.val();
-        
-        this.funcionario.setName(func["nome"]);
-        this.funcionario.setCargo(func["cargo"]);
-        this.funcionario.setAdmissao(func["admissao"]);
-        this.funcionario.setCidade(func["cidade"]);
-        this.funcionario.setCodigo(func["codigo"]);
-        this.funcionario.setCoordenador(func["coordenador"]);
-        this.funcionario.setCpf(func["cpf"]);
-      })
-        .catch(error =>{
-          console.log(error);
-      });
-      console.log(this.funcionario.getName());
-      console.log(this.funcionario.getCargo());
+
+    // this.recuperaFormulario(this.currentFuncionario.getCpf().trim());    
   }
 
+  // recuperaFormulario(key:string){
+  //   this.dataService.getFormularioNovo(key)
+  //         .then(formulario_snapshot => {              
+  //             formulario_snapshot.forEach(um_formulario_snapshot => {
+  //               let formKey = um_formulario_snapshot.key;                               
+  //               this.novoFormulario.setDataInicio(um_formulario_snapshot.val()["dataInicio"]);
+  //               this.novoFormulario.setDataFinal(um_formulario_snapshot.val()["dataFinal"]);
+  //               this.novoFormulario.setDescricao(um_formulario_snapshot.val()["descriacao"]);
+  //               this.novoFormulario.setQuestoes(um_formulario_snapshot.val()["questoes"]);
+  //               um_formulario_snapshot.val()["questoes"].forEach(questao_snapshot =>{
+  //                 let currentQuestion = new QuestionModel();
+  //                 currentQuestion.setPergunta(questao_snapshot["pergunta"]);
+  //                 currentQuestion.setQuestionNumber(questao_snapshot["questionNumber"]);
+                  
+  //                 // console.log(currentQuestion.getPergunta());
+  //                 // console.log(currentQuestion.getQuestionNumber());
+  //                 // let question = this.novoFormulario.addQuestion(questao_snapshot["pergunta"]); 
+  //                 // console.log(question);
+  //               })                
+  //             });
+  //     }, error=>{        
+
+  //     });
+  // }
+
+  openModalForm(){
+    $('#modalForm').modal('show');
+  }
 
 
 }

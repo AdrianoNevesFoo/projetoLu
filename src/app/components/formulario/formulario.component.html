@@ -1,67 +1,50 @@
-
-
+<app-navbar></app-navbar>
 
 <div class="container">
 
 <div id="formRH" class="card">
-  <h4 class="card-header headerForm">Formulario Analista</h4>
+  <h4 class="card-header headerForm">Formulario Analista:</h4>
   <div class="card-body">
+    <!-- *******************************************CABEÇALHO******************************************* -->
     <form>
       <div class="card">
         <div class="card-body">
           <form>
 
             <div class="form-group">
-              <label for="inputAddress2" class="col-form-label"><b>Nome</b> </label>
-              <input type="file" class="form-control" id="inputAddress2" placeholder="Entre com o nome do funcionário">
-            </div>
-
-            <div class="form-group">
-              <label for="inputAddress2" class="col-form-label"><b>Gerente</b> </label>
-              <input type="text" class="form-control" id="inputAddress2" placeholder="Entre com o nome de seu gerente">
-            </div>
-
-
-            <div class="form-row">
-
-              <div class="form-group col-md-6">
-                <label for="inputEmail4" class="col-form-label"><b>Cargo</b></label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Entre com o cargo do funcionário">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="inputPassword4" class="col-form-label"><b>Processo</b></label>
-                <input type="password" class="form-control" id="inputPassword4" placeholder="Processo">
-              </div>
+              <label for="inputAddress2" class="col-form-label"><b>Descrição Formulário:</b> </label>
+              <input id="formDescricao" type="text" class="form-control" placeholder="Entre com o nome do funcionário">
             </div>
             <div class="form-row">
 
-              <div class="form-group col-md-6">
-                <label for="inputEmail4" class="col-form-label"><b>Setor</b></label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Número do setor">
+              <div class="form-group col-md-4">
+                <label for="inputEmail4" class="col-form-label"><b>Data de envio:</b></label>
+                <input id="dataInicio" type="date" class="form-control" placeholder="Entre com o cargo do funcionário">
               </div>
-              <div class="form-group col-md-6">
-                <label for="inputPassword4" class="col-form-label"><b>Matrícula</b></label>
-                <input type="password" class="form-control" id="inputPassword4" placeholder="Número de matrícula">
+              <div class="col-md-4"></div>
+              <div class="form-group col-md-4">
+                <label for="inputPassword4" class="col-form-label"><b>Data limite de resposta:</b></label>
+                <input id="dataFinal" type="date" class="form-control" placeholder="Processo">
               </div>
+            </div>
+            <div class="form-row"> 
             </div>
           </form>
-
         </div>
       </div>
         <!-- *******************************************CABEÇALHO******************************************* -->
 
 
-        <div *ngFor="let question of formulario">
-          <div *ngIf="question.type == 'text'">
+        <div *ngFor="let question of formulario.getQuestions()">          
             <div class="card">
               <h6 class="card-header header-Question">
                 <div class="row">
 
                   <div class="col-10 question-text">
-                    <p align="justify">{{question.question.questionNumber}} - {{question.question.pergunta}}</p>
+                    <p align="justify">{{question.questionNumber}} - {{question.pergunta}}</p>
                   </div>
                   <div class="col-1 delete-question-button">
-                    <button id="{{question.question.id}}" type="button" class="close" aria-label="Close" (click)="removeQuestao(question.question.id)">
+                    <button id="" type="button" class="close" aria-label="Close" (click)="removeQuestao(question.questionNumber)">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
@@ -95,45 +78,7 @@
                   </div>
                 </div>
               </div>
-
-
             </div>
-          </div>
-
-          <div *ngIf="question.type == 'radio'">
-            <div class="card">
-              <h6  class="card-header header-Question">
-                <div class="row">
-                  <div class="col-11">
-                    <p align="justify">{{question.question.questionNumber}} - {{question.question.pergunta}}</p>
-                  </div>
-                  <div class="col-1">
-                    <button id="{{question.question.id}}" type="button" class="close" aria-label="Close" (click)="removeQuestao(question.question.id)">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                </div>
-              </h6>             
-              <!-- <h6 class="card-header">
-                <p>{{question.question.pergunta}}</p>
-              </h6> -->
-              <div class="card-body">
-                <div class="form-group">
-                  <div class="col-sm-10">
-                    <div *ngFor="let o of question.question.opcoes">
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                            {{o}}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
         
         
@@ -144,26 +89,6 @@
               <div id="newQuestionTextArea" class="form-group">
                 <label for="exampleTextarea"><b>Adicione uma nova pergunta: </b></label>
                 <textarea id="newQuestionTexArea" class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="newQuestion" [ngModelOptions]="{standalone: true}"></textarea>
-              </div>
-
-
-              <div id="allOptions" *ngFor="let o of newOptions">
-
-                <div id="option{{o}}" class="row optionLine">
-                  <label class="form-check-label .col-6 .col-md-4">
-                                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option2">                      
-                                    <input  type="text" class="form-control" placeholder="adicionar opção" aria-describedby="basic-addon2"[(ngModel)]="testeArray[o]" [ngModelOptions]="{standalone: true}">                                           
-                                </label>
-
-                  <div class=".col-6 .col-md-4">
-                    <a id="addOption" class="btn btn-default" aria-label="Settings" (click)="addNewOption()">
-                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>  
-                                  </a>
-                    <a id="deleteOption" class="btn btn-default" aria-label="Settings" (click)="deleteNewOption()">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i> 
-                                  </a>
-                  </div>
-                </div>
               </div>
 
 
@@ -179,19 +104,48 @@
 
       
       <div *ngIf="isCollapsed">
-        <!-- <button id="buttonAddQuestion" type="button" class="btn btn-primary" (click)="shwoCollapsed()">Adiciona</button>             -->
-        <p>
+        <div class="row">
            <a class="btn" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
-            aria-controls="collapseExample" (click)="shwoCollapsed()">
-            <a class="btn btn-default" aria-label="Settings">
-                <i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i>  
-            </a>                          
+              aria-controls="collapseExample" (click)="shwoCollapsed()">
+              <a class="btn btn-default" aria-label="Settings" data-toggle="tooltip" data-placement="top" data-toggle="tooltip" data-placement="top" title="Adicionar questão">
+                  <i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i>  
+              </a>                          
           </a> 
+          <div *ngIf="formulario.getQuestions().length > 0">
+          <a class="btn" >
+              <a id="enviarRelatorioBotao" class="btn btn-default" aria-label="Settings" data-toggle="tooltip" 
+              data-placement="top" title="Enviar formulário para funcionários" (click)="enviarFormularios()">
+                  <i class="fa fa-share-square fa-4x" aria-hidden="true"></i>  
+              </a>                          
+          </a> 
+          </div>
+        </div>
 
-        </p>
+        
       </div>    
   </div>
 </div>
 
+<button (click)="deleteFormulariosNovos()">Recupera cabecalho</button>
 
+</div>
+
+
+<div id="myModal" class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Erro de preenchimento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{erroForm}}</p>
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
 </div>

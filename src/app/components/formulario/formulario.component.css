@@ -63,3 +63,8 @@
     max-width: 100%;
     flex: 1 0 83.333333%;
 } 
+
+
+#enviarRelatorioBotao{
+    color: #337ab7;
+}

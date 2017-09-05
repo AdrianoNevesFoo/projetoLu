@@ -12,8 +12,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
-
-
 import { routing } from './app.routing';
 
 import * as $ from 'jquery';
@@ -30,7 +28,9 @@ import { AdicionarFuncionariosComponent } from './components/adicionar-funcionar
 import { DataService } from './providers/data.service';
 import { FuncionariosListComponent } from './components/funcionarios-list/funcionarios-list.component';
 import { LoginFuncionarioComponent } from './components/login-funcionario/login-funcionario.component';
-import { FuncionarioPageComponent } from './components/funcionario-page/funcionario-page.component' 
+import { FuncionarioPageComponent } from './components/funcionario-page/funcionario-page.component';
+import { AnalistaViewComponent } from './components/analista-view/analista-view.component';
+import { SupervisorViewComponent } from './components/supervisor-view/supervisor-view.component' 
 
 
 firebase.initializeApp({
@@ -54,7 +54,9 @@ firebase.initializeApp({
     AdicionarFuncionariosComponent,
     FuncionariosListComponent,
     LoginFuncionarioComponent,
-    FuncionarioPageComponent,          
+    FuncionarioPageComponent,
+    AnalistaViewComponent,
+    SupervisorViewComponent,          
   ],
   imports: [
     BrowserModule,    
